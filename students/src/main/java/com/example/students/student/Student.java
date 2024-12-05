@@ -2,14 +2,37 @@ package com.example.students.student;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+
+@Entity
+@Table
 public class Student {
+    /**
+     * take the student class(all attributes of student) and use Spring Data JPA to
+     * create a TABLE in Postgres
+     * that we can then perform all CRUD operations
+     * 
+     * Now we just need to map the Student class to the DB
+     */
+
+    @Id
+    @SequenceGenerator(name = "student_sequence", sequenceName = "student_sequence", allocationSize = 1)
+
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
+
     private Long id;
     private String name;
     private String email;
     private LocalDate dob;
     private Integer age;
 
-    public Student() {}
+    public Student() {
+    }
 
     public Student(Long id, String name, String email, LocalDate dob, Integer age) {
         this.id = id;
